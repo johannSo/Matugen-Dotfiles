@@ -1,0 +1,116 @@
+/* Importiere die Matugen-Farbdefinitionen */
+@import url("matugen/matugen-waybar.css");
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+    font-size: 14px;
+    min-height: 0;
+}
+window#waybar {
+    background-color: @surface_container;
+    border-radius: 12px;
+    color: @on_surface;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    padding: 4px 8px;
+}
+window#waybar.hidden {
+    opacity: 0.2;
+}
+#workspaces {
+    margin: 0 4px;
+}
+#workspaces button {
+    padding: 0 6px;
+    background-color: transparent;
+    color: @on_surface;
+    border-radius: 8px;
+    margin: 2px;
+    min-width: 24px;
+    min-height: 24px;
+}
+#workspaces button:hover {
+    background: @surface_container_high;
+    box-shadow: inherit;
+}
+#workspaces button.active {
+    background-color: @primary;
+    color: @on_primary;
+}
+#workspaces button.urgent {
+    background-color: @error;
+    color: @on_error;
+}
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#custom-notification,
+#tray {
+    padding: 0 12px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    min-height: 28px;
+    font-size: 13px;
+}
+#clock {
+    background-color: @primary_container;
+    color: @on_primary_container;
+}
+#battery {
+    background-color: @tertiary_container;
+    color: @on_tertiary_container;
+}
+#battery.charging, #battery.plugged {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+#battery.critical:not(.charging) {
+    background-color: @error_container;
+    color: @on_error_container;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#network {
+    background-color: @primary_container;
+    color: @on_primary_container;
+}
+#network.disconnected {
+    background-color: @error_container;
+    color: @on_error_container;
+}
+#pulseaudio {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+#pulseaudio.muted {
+    background-color: @tertiary_container;
+    color: @on_tertiary_container;
+}
+#custom-notification {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+#tray {
+    background-color: @surface_container_high;
+    color: @on_surface;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+/* Füge vertikale Zentrierung für alle Module hinzu */
+#battery, #clock, #cpu, #custom-media, #memory, #mode, #network, 
+#pulseaudio, #custom-notification, #temperature, #tray, #idle_inhibitor, #custom-power,
+#custom-pacman, #workspaces {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+@keyframes blink {
+    to {
+        background-color: @surface;
+        color: @error;
+    }
+}
