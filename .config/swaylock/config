@@ -1,0 +1,180 @@
+# Catppuccin Mocha theme for swaylock
+
+# General settings
+ignore-empty-password
+show-failed-attempts
+daemonize
+show-keyboard-layout
+indicator-idle-visible
+
+# Indicator settings
+indicator-radius=100
+indicator-thickness=7
+indicator-caps-lock
+
+# Font settings
+font=JetBrainsMono Nerd Font
+font-size=20
+
+# Catppuccin Mocha colors (with # prefix)
+key-hl-color=#cba6f7
+bs-hl-color=#f38ba8
+caps-lock-bs-hl-color=#fab387
+caps-lock-key-hl-color=#89b4fa
+
+# Inside circle colors
+inside-color=#1e1e2e
+inside-clear-color=#1e1e2e
+inside-caps-lock-color=#1e1e2e
+inside-ver-color=#1e1e2e
+inside-wrong-color=#1e1e2e
+
+# Ring colors
+ring-color=#313244
+ring-clear-color=#f5e0dc
+ring-caps-lock-color=#fab387
+ring-ver-color=#89b4fa
+ring-wrong-color=#f38ba8
+
+# Text colors
+text-color=#cdd6f4
+text-clear-color=#f5e0dc
+text-caps-lock-color=#fab387
+text-ver-color=#89b4fa
+text-wrong-color=#f38ba8
+
+# Line and separator colors
+line-color=#00000000
+line-clear-color=#00000000
+line-caps-lock-color=#00000000
+line-ver-color=#00000000
+line-wrong-color=#00000000
+separator-color=#00000000
+
+# Layout colors
+layout-bg-color=#1e1e2e
+layout-border-color=#313244
+layout-text-color=#cdd6f4
+
+# Image scaling (if you use -i flag)
+scaling=fill# Catppuccin Mocha theme for swaylock
+
+# General settings
+ignore-empty-password
+show-failed-attempts
+daemonize
+show-keyboard-layout
+indicator-idle-visible
+
+# Indicator settings
+indicator-radius=100
+indicator-thickness=7
+
+# Font settings
+font=JetBrainsMono Nerd Font
+font-size=20
+
+# Catppuccin Mocha colors
+key-hl-color=cba6f7
+bs-hl-color=f38ba8
+caps-lock-bs-hl-color=fab387
+caps-lock-key-hl-color=89b4fa
+
+# Inside circle colors
+inside-color=1e1e2e
+inside-clear-color=1e1e2e
+inside-caps-lock-color=1e1e2e
+inside-ver-color=1e1e2e
+inside-wrong-color=1e1e2e
+
+# Ring colors
+ring-color=313244
+ring-clear-color=f5e0dc
+ring-caps-lock-color=fab387
+ring-ver-color=89b4fa
+ring-wrong-color=f38ba8
+
+# Text colors
+text-color=cdd6f4
+text-clear-color=f5e0dc
+text-caps-lock-color=fab387
+text-ver-color=89b4fa
+text-wrong-color=f38ba8
+
+# Line and separator colors
+line-color=00000000
+line-clear-color=00000000
+line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+separator-color=00000000
+
+# Clock format (optional - requires you to manually add clock flags)
+# Set timestr and datestr if your swaylock version supports them
+# timestr=%I:%M %p
+# datestr=%A, %B %d
+
+# Image settings (uncomment if you want a background)
+# image=/path/to/wallpaper.png
+scaling=fill
+# effect-blur=7x5
+# effect-vignette=0.5:0.5# Catppuccin Mocha theme for swaylock
+
+# General settings
+ignore-empty-password
+show-failed-attempts
+daemonize
+show-keyboard-layout
+indicator
+clock
+
+# Appearance
+font=JetBrainsMono Nerd Font
+font-size=20
+
+# Catppuccin Mocha colors
+key-hl-color=cba6f7
+bs-hl-color=f38ba8
+caps-lock-bs-hl-color=fab387
+caps-lock-key-hl-color=89b4fa
+
+# Inside circle colors
+inside-color=1e1e2e
+inside-clear-color=1e1e2e
+inside-caps-lock-color=1e1e2e
+inside-ver-color=1e1e2e
+inside-wrong-color=1e1e2e
+
+# Ring colors
+ring-color=313244
+ring-clear-color=f5e0dc
+ring-caps-lock-color=fab387
+ring-ver-color=89b4fa
+ring-wrong-color=f38ba8
+
+# Text colors
+text-color=cdd6f4
+text-clear-color=f5e0dc
+text-caps-lock-color=fab387
+text-ver-color=89b4fa
+text-wrong-color=f38ba8
+
+# Line and separator (optional)
+line-color=00000000
+line-clear-color=00000000
+line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+separator-color=00000000
+
+# Time and date format
+timestr=%I:%M %p
+datestr=%A, %B %d
+
+# Image settings (if you want to use a background image)
+# image=/path/to/background.png
+scaling=fill
+effect-blur=7x5
+effect-vignette=0.5:0.5
+
+

@@ -8,8 +8,8 @@
     "margin-bottom": 0,
     "spacing": 4,
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock", "custom/notification"],
-    "modules-right": ["network", "battery", "pulseaudio", "tray"],
+    "modules-center": ["custom/weather", "clock", "custom/notification"],
+    "modules-right": ["network", "battery", "pulseaudio", "tray", "custom/power"],
     
     "hyprland/workspaces": {
         "format": "{name}",
@@ -18,23 +18,66 @@
         "sort-by-number": true
     },
     
+    "custom/weather": {
+		  "format": "{}",
+		  "format-alt": " {alt}",
+		  "format-alt-click": "click",
+		  "interval": 3600,
+		  "return-type": "json",
+		  "exec": "$HOME/.config/waybar/scripts/Weather.sh",
+		  "exec-if": "ping wttr.in -c1",
+		  "tooltip": true
+	  },
+
     "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%Y-%m-%d %H:%M:%S}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": " {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-icons": ["", "", "", "", ""]
-    },
-    
+	"custom/notification": {
+		"format": "{} {icon} ",
+		"format-icons": {
+			"notification": "<span foreground='red'><sup></sup></span>",
+			"none": "",
+			"dnd-notification": "<span foreground='red'><sup></sup></span>",
+			"dnd-none": "",
+			"inhibited-notification": "<span foreground='red'><sup></sup></span>",
+			"inhibited-none": "",
+			"dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+			"dnd-inhibited-none": ""
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "sleep 0.1 && swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+  },
+
+  "battery": {
+		"format": "{icon}  {capacity}%",
+		"format-alt": "{icon} {time}",
+		"format-charging": " {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"format-plugged": " {capacity}% ",
+		"format-time": "{H} h {m} min",
+		"states": {
+			"critical": 15,
+			"good": 95,
+			"warning": 30
+		},
+  },
+    "custom/power": {
+        "format": " ⏻  ",
+        "on-click": "wlogout"
+  },
+  }  
     "network": {
         "format-wifi": "{essid}",
         "format-ethernet": "{ipaddr}/{cidr}",
@@ -43,40 +86,22 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     
-    "pulseaudio": {
-        "format": "󰖀 {volume}%",
-        "format-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-icons": {
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			]
+		},
+		"format-muted": "󰝟",
+		"on-click": "pavucontrol",
+		"scroll-step": 5
+	},
     
     "tray": {
         "icon-size": 21,
         "spacing": 10
     },
-    
-    "custom/notification": {
-        "tooltip": false,
-        "format": " {}",
-        "format-icons": {
-            "notification": "",
-            "none": "",
-            "dnd-notification": "",
-            "dnd-none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    }
 }

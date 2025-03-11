@@ -1,0 +1,64 @@
+/* style.css für wlogout */
+
+* {
+/* style.css für wlogout unter Hyprland */
+
+* {
+    background-image: none;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+}
+
+window {
+    background-color: rgba(12, 12, 12, 0.9);
+}
+
+button {
+    color: #cdd6f4;
+    background-color: rgba(30, 30, 46, 0.7);
+    border-style: solid;
+    border-width: 0px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 35%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin: 10px;
+    padding: 40px;
+}
+
+button:focus, button:active, button:hover {
+    background-color: rgba(166, 173, 200, 0.2);
+    outline-style: none;
+    border: 2px solid #7287fd;
+}
+
+label {
+    background-color: transparent;
+    color: #cdd6f4;
+    font-size: 16pt;
+    padding-top: 100px;
+}
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("./icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("./icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("./icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("./icons/reboot.png"));
+}

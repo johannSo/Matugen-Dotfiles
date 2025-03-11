@@ -249,14 +249,14 @@
 # for matugen
 gradient = 1
 gradient_count = 8
-gradient_color_1 = '#39383f'
-gradient_color_2 = '#404178'
-gradient_color_3 = '#454559'
-gradient_color_4 = '#5f3c51'
-gradient_color_5 = '#ffb4ab'
-gradient_color_6 = '#c1c1ff'
-gradient_color_7 = '#c6c4dd'
-gradient_color_8 = '#e9b9d3'
+gradient_color_1 = '{{colors.surface_bright.default.hex}}'
+gradient_color_2 = '{{colors.primary_container.default.hex}}'
+gradient_color_3 = '{{colors.secondary_container.default.hex}}'
+gradient_color_4 = '{{colors.tertiary_container.default.hex}}'
+gradient_color_5 = '{{colors.error.default.hex}}'
+gradient_color_6 = '{{colors.primary.default.hex}}'
+gradient_color_7 = '{{colors.secondary.default.hex}}'
+gradient_color_8 = '{{colors.tertiary.default.hex}}'
 
 
 [smoothing]

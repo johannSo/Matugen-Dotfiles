@@ -1,0 +1,168 @@
+# Sway Configuration File
+
+# Import base config
+include ~/.config/sway/mocha.conf
+# Import color scheme
+include ~/.config/sway/mocha.conf
+
+# Autostart applications
+exec waybar
+exec /home/satoshi/bin/autotiling
+exec swaync
+exec_always swww init
+exec_always swww restore
+exec gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Amber'
+exec wl-paste --type text --watch cliphist store
+exec wl-paste --type image --watch cliphist store
+exec eww daemon && eww open clock1 && eww open clock2
+
+# Set Cursor:
+exec swaymsg seat seat0 xcursor_theme Bibata-Modern-Amber
+
+# SwayFX
+corner_radius 10
+smart_corner_radius on
+
+# Monitor configuration
+output eDP-1 scale 1.6
+output DP-3 resolution 1920x1200 position 0,0
+
+# Set programs
+set $terminal kitty
+set $fileManager nautilus
+set $menu wofi --show drun
+
+# Input configuration
+input type:keyboard {
+    xkb_layout de
+    xkb_options ctrl:nocaps
+}
+
+input type:touchpad {
+    natural_scroll enabled
+}
+
+# Visual configuration
+font pango:monospace 10
+default_border pixel 3
+default_floating_border pixel 3
+gaps inner 4
+gaps outer 8
+
+# Colors (using variables from mocha.conf)
+client.focused $mauve $flamingo $text $mauve $mauve
+client.unfocused $surface0 $base $subtext0 $surface0 $surface0
+
+# Window rules
+for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] max_render_time 1
+
+# Idle configuration
+# (Equivalent to hypridle - you'll need to create a swayidle configuration)
+exec swayidle -w \
+    timeout 300 'hyprlock' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'hyprlock'
+
+# XWayland configuration
+xwayland enable
+exec_always xrdb -load ~/.Xresources
+
+# Environment variables
+set $XCURSOR_SIZE 24
+set $XCURSOR_THEME Bibata-Modern-Amber
+
+# Key bindings
+set $mod Mod4
+
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+}
+
+# swaync
+bindsym $mod+Shift+n exec swaync-client -t -sw
+
+# Sound through pactl
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# Brightness through brightnessctl
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Application bindings
+bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+e exec $fileManager
+bindsym $mod+q kill
+bindsym $mod+Shift+m exit
+bindsym $mod+t floating toggle
+bindsym $mod+space exec $menu
+bindsym $mod+v exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+bindsym $mod+l exec hyprlock
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+d output eDP-1 disable
+bindsym $mod+Shift+f output eDP-1 enable
+bindsym $mod+Shift+s exec /home/satoshi/bin/grimshot save area
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+w layout tabbed
+bindsym $mod+h layout splitv
+bindsym $mod+Escape exec wlogout
+
+# Focus movement
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# Switch workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move active window to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Scroll through workspaces
+bindsym $mod+button4 workspace prev
+bindsym $mod+button5 workspace next
+
+# Mouse bindings
+floating_modifier $mod normal
+
+# Move/resize windows with mod+mouse
+# bindsym --whole-window $mod+button1 move scratchpad
+# bindsym --whole-window $mod+button3 floating toggle
+
+# Resizing mode
+mode "resize" {
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"

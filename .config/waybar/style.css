@@ -47,6 +47,9 @@ window#waybar.hidden {
 #network,
 #pulseaudio,
 #custom-notification,
+#custom-weather,
+#custom-power,
+
 #tray {
     padding: 0 12px;
     margin: 4px 2px;
@@ -92,6 +95,10 @@ window#waybar.hidden {
     color: @on_tertiary_container;
 }
 #custom-notification {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+#custom-weather {
     background-color: @secondary_container;
     color: @on_secondary_container;
 }
