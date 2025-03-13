@@ -1,0 +1,190 @@
+(defpoll music_url :interval "800ms" "sh scripts/songart.sh echo")
+(defpoll song :interval "1s" "playerctl metadata --format '{{title}}'")
+(defpoll song_artist :interval "1s" "playerctl metadata --format '{{artist}}'")
+(defpoll song_status :interval "800ms" "sh scripts/status-player")
+
+(defpoll bluetooth-icon :interval "1s" "scripts/bluetooth --icon")
+(defpoll bluetooth-status :interval "1s" "scripts/bluetooth --status")
+(defpoll bluetooth-battery :interval "1s" "scripts/bluetooth --battery")
+
+(defpoll current-volume :interval "0s" "pamixer --get-volume")
+(defpoll current-brightness :interval "1s" "brightnessctl -m | awk -F, '{print $4}' | tr -d '%'")
+
+(defpoll weather-temp :interval "5m" "scripts/weather")
+(defvar weather-color "")
+(defvar weather-icon "")
+
+(defpoll wifi-icon :interval "1s" "scripts/wifi icon")
+(defpoll wifi-name :interval "1s" "scripts/wifi name")
+
+(defpoll nightcolor-status :interval "1s" "sh scripts/nightcolor status")
+
+;; ============================================================
+;;                                                      Widgets
+;; ============================================================
+
+(defwidget cc-top-left-widgets []
+    (box :class "cc-connectivity-box" :orientation "h" :space-evenly false :halign "fill"
+        (box :class "cc-connectivity-glyph-rows" :orientation "v" :width 70
+            (button :class "cc-wifi-glyph" :halign "center" :valign "center" 
+                    :onclick "scripts/wifi toggle" 
+                (label :class "cc-wifi-glyph-lb" :text wifi-icon)
+            )
+            (button :class "cc-bluetooth-glyph" :halign "center" :valign "center" 
+                    :onclick "scripts/bluetooth --toggle" 
+                (label :text bluetooth-icon)
+            )
+            (button :class "cc-nightcolor-glyph" :halign "center" :valign "center" :onclick "sh scripts/nightcolor toggle"
+                (label :class "cc-nightcolor-glyph-lb" :text "")
+            )
+        )
+        (box :class "cc-connectivity-rows" :orientation "v" :width 60 :padding 5
+            (box :class "cc-wifi-box" :orientation "v" :valign "center"
+                (label :class "cc-title-label" :halign "start" :text "WiFi")
+                (label :class "cc-sub-label" :halign "start" :text "${wifi-name}")
+            )
+            (box :class "cc-bt-box" :orientation "v" :valign "center"
+                (label :class "cc-title-label" :halign "start" :text "Bluetooth")
+                (label :class "cc-sub-label" :halign "start" :text bluetooth-status)
+            )
+            (box :class "cc-bt-box" :orientation "v" :valign "center"
+                (label :class "cc-title-label" :halign "start" :text "Night Color")
+                (label :class "cc-sub-label" :halign "start" :text nightcolor-status)
+            )
+        )
+    )
+)
+
+(defwidget cc-top-right-widgets []
+    (box :class "cc-row-box" :orientation "v" :space-evenly false :spacing 10
+        (box :class "cc-screenshot-box" :orientation "h" :space-evenly false
+            (overlay :halign "start" :valign "center" :width 70
+                (button :class "cc-screenshot-glyph" :halign "center" :valign "center" :style "background: rgba(255,255,255,0.15);"
+                        :onclick "grim -g \"$(slurp)\" ~/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send --urgency=normal 'Screenshot' 'Screenshot saved!'"
+                        (label :text "󰹑")
+                )
+            )
+            (box :class "cc-screenshot" :orientation "v" :valign "center" :halign "start"
+                (label :class "cc-title-label" :halign "start" :text "Screenshot")
+                (label :class "cc-sub-label" :halign "start" :text "Capture")
+            )
+        )
+        (box :class "cc-row-box" :orientation "h" :halign "fill" :spacing 10
+            (battery-monitor)
+            (overlay :class "${weather-color}"
+                (box :class "cc-weather-box" :orientation "v" :space-evenly false
+                    (label :class "cc-weather-icon" :halign "center" :text "${weather-icon}")
+                    (label :class "cc-weather-label" :halign "center" :text "${weather-temp}°")
+                )
+            )
+        )
+    )
+)
+
+(defwidget volume-slider []
+    (box :class "cc-slider-box" :orientation "v"
+        (label :class "cc-slider-title" :halign "start" :text "Sound")
+        (box :class "cc-saber-box" :orientation "h" :space-evenly false
+            (scale :class "cc-volbar"
+                    :valign "start"
+                    :value "${current-volume}"
+                    :orientation "h"
+                    :flipped false
+                    :tooltip "Sound: ${current-volume}%"
+                    :width 385
+                    :max 101
+                    :min 0
+                    :onchange "pactl set-sink-volume @DEFAULT_SINK@ {}%")
+        )
+    )
+)
+
+(defwidget brightness-slider []
+    (box :class "cc-slider-box" :orientation "v"
+        (label :class "cc-slider-title" :halign "start" :text "Brightness")
+        (box :class "cc-saber-box" :orientation "h" :space-evenly false
+            (scale :class "cc-bribar"
+                    :valign "start"
+                    :value current-brightness
+                    :orientation "h"
+                    :flipped false
+                    :tooltip "Brightness: ${current-brightness}%"
+                    :width 385
+                    :max 100
+                    :min 0
+                    :onchange "brightnessctl set {}%")
+        )
+    )
+)
+
+(defwidget battery-monitor []
+    (box :class "cc-bat-box" :orientation "h" :space-evenly true
+        (circular-progress :class "cc-bat" :value bluetooth-battery :thickness 10
+            (label :class "cc-bat-icon" :limit-width 3 :show_truncated false :wrap false :text bluetooth-battery)
+        )
+    )
+)
+
+(defwidget music []
+    (box :class "msc_box" :orientation "h" :style "background-image: linear-gradient( 0.20turn, rgba(0, 0, 0, 0.3)), url('${music_url}');"
+        (box :orientation "v" :class "eltouch" :space-evenly "false" :vexpand "false" :hexpand "false"
+            (box :orientation "h" :space-evenly "false"
+                (button :class "song_btn_prev" :onclick "playerctl previous" "")
+                (button :class "song_btn_play" :onclick "playerctl play-pause" song_status)
+                (button :class "song_btn_next" :onclick "playerctl next" "")
+            )
+            (label :halign "start" :class "song" :wrap "false" :limit-width 45 :text song)
+            (label :halign "start" :class "song_artist" :wrap "true" :limit-width 30 :text song_artist)
+        )
+    )
+)
+
+;; ============================================================
+;;                                         Widget Consolidation
+;; ============================================================
+
+(defwidget cc-top []
+    (box :orientation "h" :space-evenly true :height 160 :spacing 10
+        (cc-top-left-widgets)
+        (cc-top-right-widgets)
+    )
+)
+
+(defwidget cc-middle []
+    (box :class "cc-row-two-box" :orientation "v" :space-evenly false :spacing 10
+        (volume-slider)
+        (brightness-slider)
+    )
+)
+
+(defwidget cc-bottom []
+    (box :class "cc-charts" :orientation "v" :space-evenly true :spacing 10
+         (music)
+    )
+)
+
+;; ============================================================
+;;                                      Control Center Assembly
+;; ============================================================
+
+(defwidget control-center []
+    (box :class "cc-main-box" :orientation "v" :space-evenly false :halign "center" :width 431
+        (box :class "cc-padded-box" :orientation "v" :space-evenly false :spacing 10
+            (cc-top)
+            (cc-middle)
+            (cc-bottom)
+        )
+    )
+)
+
+;; ============================================================
+;;                                                      Windows
+;; ============================================================
+
+(defwindow control-center 
+    :geometry (geometry :x "77%" :y "1%")
+    :monitor 0 
+    :stacking "fg" 
+    :exclusive "true"
+    (control-center)
+)

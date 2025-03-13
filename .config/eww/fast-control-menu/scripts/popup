@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "$1" = "launcher" ]; then
+    rofi -show drun
+elif [ "$1" = "wifi" ]; then
+    sh ~/.config/hypr/scripts/wifi-manager
+elif [ "$1" = "audio" ]; then
+    pavucontrol
+elif [ "$1" = "bluetooth" ]; then
+    # blueberry
+    sh ~/.config/hypr/scripts/blue-manager
+fi

@@ -1,0 +1,262 @@
+// ============================================================
+// Control Center
+// ============================================================
+// Control Center
+// ============================================================
+
+* {
+ all: unset;
+}
+
+// Main colors
+$black: #242424;
+$red: #d84b4f;
+$yellow: #d8af4b;
+$green: #9ed84b;
+$blue: #4b91d8;
+$magenta: #734bd8;
+$cyan: #4bd8a2;
+$white: #c6c6c6;
+$gray: gray;
+$gray-alt: #333333;
+
+// Control Center Main Colors
+$cc-fg: $white;
+$cc-bg: rgba($color: $black, $alpha: 0.5);
+$cc-circular-bg: rgba($color: $gray, $alpha: 0.8);
+$cc-text: $white;
+$cc-br: rgba(148, 144, 144, 0.4);
+
+// Main container box
+.cc-padded-box {
+// ============================================================
+//                                               Control Center
+// ============================================================
+
+* {
+  all: unset;
+}
+
+// Importiere die Farben aus Kitty/Matugen
+@import "~/.config/kitty/matugen/colors.css";
+
+// Main colors
+$black: #242424;
+$red: #d84b4f;
+$yellow: #d8af4b;
+$green: #9ed84b;
+$blue: #4b91d8;
+$magenta: #734bd8;
+$cyan: #4bd8a2;
+$white: #c6c6c6;
+$gray: gray;
+$gray-alt: #333333;
+
+// Control Center Main Colors
+$cc-fg: $white;
+$cc-bg: rgba($color: $black, $alpha: 0.5);
+$cc-circular-bg: rgba($color: $gray, $alpha: 0.8);
+$cc-text: $white;
+$cc-br: rgba(148, 144, 144, 0.4);
+
+// Main container box
+.cc-padded-box {
+  background-color: rgba(var(--background), 0.4); // Farbe aus colors.css mit Transparenz
+  border-radius: 16px; // Abgerundete Ecken
+  padding: 10px;
+  border: 1px solid $cc-br;
+}
+
+.cc-padded-box-ms {
+  min-height: 470px;
+  margin-top: 10px;
+}
+
+// Smaller boxes containing top widgets
+.cc-connectivity-box,
+.cc-screenshot-box,
+.cc-keybright-box,
+.cc-weather-box {
+  background-color: $cc-bg;
+  border-radius: 20px;
+  border: 1px solid $cc-br;
+}
+
+.cc-screenshot-box {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.cc-weather-icon {
+  margin-top: 8px;
+  font-size: 34px;
+  margin-right: 12px;
+}
+
+.cc-weather-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: $cc-fg;
+}
+
+.blue-text {
+  color: $blue;
+}
+
+.yellow-text {
+  color: $yellow;
+}
+
+.red-text {
+  color: $red;
+}
+
+.cc-wifi-glyph {
+  background: $cc-bg;
+}
+
+.cc-bluetooth-circle-glyph {
+  color: $cc-bg;
+}
+
+.cc-nightcolor-glyph {
+  background: $cc-bg;
+}
+
+.cc-bluetooth-glyph {
+  background: $cc-bg;
+}
+
+.cc-screenshot-glyph {
+  background: $cc-bg;
+}
+
+// Actual glyph symbols contained in above circles
+.cc-wifi-glyph,
+.cc-bluetooth-glyph,
+.cc-nightcolor-glyph,
+.cc-screenshot-glyph {
+  font-size: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.cc-wifi-glyph-lb {
+  margin-right: 8px;
+}
+
+.cc-nightcolor-glyph-lb {
+  margin-right: 6px;
+}
+
+// Text labels
+.cc-title-label,
+.cc-sub-label {
+  color: $cc-text;
+}
+
+.cc-title-label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+// Slider bars
+.cc-slider-box {
+  background-color: $cc-bg;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 20px;
+  border: 1px solid $cc-br;
+}
+
+.cc-slider-title {
+  font-size: 1.5em;
+  padding: 5px;
+  color: $cc-text;
+}
+
+// Rounding all sides of sliders & setting thickness (height)
+.cc-volbar trough highlight,
+.cc-bribar trough highlight {
+  min-height: 13px;
+  border-radius: 100px;
+  background-color: $green;
+}
+
+.cc-bribar trough highlight {
+  background-color: $blue;
+}
+
+// Slider trough (Hintergrund des Sliders)
+.cc-volbar trough,
+.cc-bribar trough {
+  background-color: rgba($gray, 0.3);
+  min-height: 13px;
+  border-radius: 100px;
+}
+
+// Positionierung der Slider
+.cc-volbar,
+.cc-bribar {
+  margin-top: 10px;
+}
+
+// Bluetooth battery circles
+.cc-bat-box {
+  background-color: $cc-bg;
+  border-radius: 20px;
+  padding: 8px;
+  min-height: 70px;
+  border: 1px solid $cc-br;
+}
+
+.cc-bat-icon {
+  font-size: 20;
+  margin: 10px;
+  color: $white;
+}
+
+.cc-bat {
+  color: $green;
+  background-color: $cc-circular-bg;
+}
+
+.msc_box {
+  min-height: 90px;
+  background-color: rgba($color: gray, $alpha: 0.4);
+  padding: 15px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid $cc-br;
+}
+
+.song_btn_prev,
+.song_btn_next,
+.song_btn_play {
+  font-size: 20px;
+  font-weight: normal;
+  padding-right: 25px;
+}
+
+.song,
+.song_artist {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.eltouch {
+  margin-top: 39px;
+}
+
+.icon-module {
+  margin: 0 5px;
+  & > &__icon {
+    margin-right: 5px;
+    font-family: "Font Awesome 5 Free Solid";
+  }
+}

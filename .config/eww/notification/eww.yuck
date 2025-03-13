@@ -1,0 +1,80 @@
+(defpoll dunsthistory :interval "250ms" "dunstctl history")
+(defpoll dunstcount :interval "250ms" "dunstctl count history")
+
+(defwidget notification [title summary body id is_ss]
+	(box :class "notification" :orientation "v" :height 50 :space-evenly "false"
+		(box :class "notification-title"
+			(label :class "notification-title-text" :halign "start" :text is_ss)
+            (box :halign "end"
+                (button :class "notification-close"
+                    :onclick "dunstctl history-rm ${id}"
+                    "󰅖"
+                )
+            )
+		)
+		(box :class "notification-body" :space-evenly "false" :orientation "v"
+			(box :space-evenly "false" :spacing 8 :orientation "v"
+                (box :halign "start" :valign "start"
+                    (box :class "notification-content" :orientation "v" :space-evenly "false"
+                        (label :class "notification-summary" :halign "start" :valign "start"
+                            :limit-width 25
+                            :text summary)
+                        (label :class "notification-message" :halign "start" :valign "start"
+                            :limit-width 350 :wrap true :tooltip body
+                            :xalign 0
+                            :text body)
+                    )
+                )
+            )
+        )
+	)
+)
+(defwidget notifcenter[]
+    (box :class "box-notifcenter" :orientation 'v' :space-evenly true
+        (scroll :vscroll true
+          (box :orientation 'v' :space-evenly false
+              (box :orientation "v" :space-evenly false :spacing 10
+                (for entry in {dunsthistory["data"][0]}
+                    (box :class "notification-history" :orientation "v" :space-evenly "false"
+                        (box :orientation 'v' :space-evenly false
+                            (notification :class 'notif-${entry["id"]["data"]}'
+                                :title {entry["appname"]["data"]}
+                                :id {entry["id"]["data"]}
+                                :summary {entry["summary"]["data"]}
+                                :body {entry["body"]["data"]}
+                                :is_ss {entry["appname"]["data"] == "ss" ? "Screenshot Tool" : entry["appname"]["data"]}
+                            )
+                        )
+                    )
+                )
+              )
+              (revealer :vexpand true :reveal {dunstcount <= 0} :transition "crossfade"
+
+                    (box :orientation "v" :space-evenly "false" :spacing 10 :valign "center"
+                         (label :class "eon"
+                            :valign "center"
+                            :text "Notification Center"
+                         )
+                        (label :class "eon"
+                            :valign "center"
+                            :text "No Notifications."
+                        )
+                    )
+
+              )
+          )
+        )
+    )
+)
+
+(defwidget control-center []
+    (box :class "cc-padded-box-ms" :orientation "v" :space-evenly true :spacing 10 :width 431
+        (notifcenter)
+    )
+)
+
+(defwindow notifcenter :geometry (geometry :x "77%" :y "1px" )
+    :monitor 0
+    :stacking "fg"
+	(control-center )
+)

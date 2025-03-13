@@ -1,0 +1,32 @@
+#!/bin/bash
+
+toggle() {
+  # Prüfe, ob hyprsunset läuft
+  if pgrep -f "hyprsunset --temperature 2500" >/dev/null; then
+    # Hyprsunset läuft, also ausschalten
+    pkill -f "hyprsunset --temperature 2500"
+    hyprctl keyword decoration:screen_shader "[[EMPTY]]" # Shader zurücksetzen
+    notify-send --urgency=normal "Nightlight" "Nightlight turned off"
+  else
+    # Hyprsunset läuft nicht, also einschalten
+    hyprsunset --temperature 2500 &
+    notify-send --urgency=normal "Nightlight" "Nightlight turned on"
+  fi
+}
+
+status() {
+  # Prüfe, ob hyprsunset mit der Temperatur läuft
+  if pgrep -f "hyprsunset --temperature 2500" >/dev/null; then
+    echo "on"
+  else
+    echo "off"
+  fi
+}
+
+if [[ $1 == "toggle" ]]; then
+  toggle
+elif [[ $1 == "status" ]]; then
+  status
+else
+  echo "Invalid argument. Use 'toggle' or 'status'."
+fi

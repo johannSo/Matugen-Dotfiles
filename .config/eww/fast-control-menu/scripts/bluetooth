@@ -1,0 +1,61 @@
+#!/bin/sh
+
+toggle() {
+  STATUS="$(bluetoothctl show | grep Powered | awk '{print $2}')"
+  if [ "$STATUS" == "yes" ]; then
+    bluetoothctl power off
+    notify-send --icon=bluetooth-offline --urgency=normal "Bluetooth" "Bluetooth has been turned off."
+  else
+    bluetoothctl power on
+    notify-send --icon=bluetooth --urgency=normal "Bluetooth" "Bluetooth has been turned on."
+  fi
+}
+
+icon() {
+  if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+    echo "󰂲" # Bluetooth aus
+  else
+    if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+      echo "󰂯" # Bluetooth an, nicht verbunden
+    else
+      echo "󰂱" # Bluetooth an, verbunden
+    fi
+  fi
+}
+
+status() {
+  if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+    echo "Off" # Bluetooth aus
+  else
+    if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+      echo "On" # Bluetooth an, nicht verbunden
+    else
+      DEVICE=$(echo info | bluetoothctl | grep 'Alias:' | awk -F: '{ print $2 }' | sed 's/^[ \t]*//')
+      echo "$DEVICE" # Gerätename, wenn verbunden
+    fi
+  fi
+}
+
+battery() {
+  mac_address=$(bluetoothctl info | grep "Device" | awk '{print $2}')
+  if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+    echo "󰂲" # Bluetooth aus
+  else
+    if [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+      echo "󰂰" # Bluetooth an, nicht verbunden
+    else
+      BATTERY=$(echo -e "info $mac_address" | bluetoothctl | grep "Battery" | awk '{print $4}' | tr -d '()')
+      echo "$BATTERY" # Batteriestand, wenn verbunden
+    fi
+  fi
+}
+
+if [[ $1 == "--status" ]]; then
+  status
+elif [[ $1 == "--icon" ]]; then
+  icon
+elif [[ $1 == "--toggle" ]]; then
+  toggle
+elif [[ $1 == "--battery" ]]; then
+  battery
+fi

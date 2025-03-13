@@ -1,0 +1,59 @@
+*{
+  all:unset;
+}
+
+// Main colors
+$black: #242424;
+$red: #d84b4f;
+$yellow: #d8af4b;
+$green: #9ed84b;
+$blue: #4b91d8;
+$magenta: #734bd8;
+$cyan: #4bd8a2;
+$white: #c6c6c6;
+$gray: gray;
+$gray-alt: #333333;
+
+// Control Center Main Colors
+$cc-fg: $white;
+$cc-bg: rgba($color: $black, $alpha: 0.5);
+$cc-circular-bg: rgba($color: $gray, $alpha: 0.8);
+$cc-text: $white;
+$cc-br: rgba(148, 144, 144, 0.4);
+
+.cc-padded-box {
+  background-color: rgba($color: $gray, $alpha: 0.4);
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid $cc-br;
+}
+
+.cc-padded-box-ms{
+  min-height: 530px;
+  margin-top: 10px;
+
+}
+
+.notification, .box-notifcenter {
+  background-color: rgba($color: $gray-alt, $alpha: 0.4);
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid $cc-br;
+}
+
+.notification-title {
+    font-size: 16px;
+}
+.notification-body {
+    font-size: 14px;
+    margin-top: 1rem;
+}
+
+
+.notification-close {
+  background-color: rgba($color: $gray, $alpha: 0.4);
+  border-radius: 16px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid $cc-br;
+}

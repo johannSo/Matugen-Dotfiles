@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+DIR=~/Pictures/Screenshots
+
+# Проверяем, существует ли папка Screenshots
+if [ ! -d "$DIR" ]; then
+    # Создаем папку Screenshots, если она не существует
+    mkdir -p "$DIR"
+fi
+
+SCREENSHOT="$DIR/$(date +%Y-%m-%d-%H:%M:%S).png"
+grim -g "$(slurp)" "$SCREENSHOT" && {
+    wl-copy < "$SCREENSHOT"
+    dunstify "Screenshot saved" -a "ss" -i "$SCREENSHOT"
+}

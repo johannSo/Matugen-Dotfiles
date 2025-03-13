@@ -1,0 +1,23 @@
+(defpoll bluetooth-devices-name :interval "10s" "sh scripts/find-bluetooth name")
+(defpoll bluetooth-devices-battery :interval "10s" "sh scripts/find-bluetooth battery")
+(defpoll bluetooth-devices-icon :interval "10s" "sh scripts/find-bluetooth icon")
+
+(defwidget bluetooth-device [name battery icon]
+ (box :class "bluetooth-device" :orientation "v"
+  (box :class "workspaces" :orientation "h" :halign "start" :spacing 10
+      (box :space-evenly true
+         (label :text name)
+         (box :orientation "h" :space-evenly false
+           (label :text battery)
+           (label :text icon)
+         )
+      )
+  )
+ )
+)
+
+(defwindow list-bluetooth-devices
+ :stacking "fg" :geometry (geometry :x "74%" :y "1%") :monitor 0
+ (literal :content '(bluetooth-device :name bluetooth-devices-name :battery bluetooth-devices-battery :icon bluetooth-devices-icon)' )
+)
+

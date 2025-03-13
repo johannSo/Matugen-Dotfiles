@@ -1,0 +1,51 @@
+(defvar filter-text "[]")
+(defvar input-text "")
+
+(defwidget application [name command icon]
+    (box :class "app-item"
+        (eventbox :class "app-btn"
+            (button :onclick "${command}&disown; eww close app-launcher -c ~/.config/eww/launchpad;"
+                (box :orientation "v" :space-evenly false :halign "center" :valign "center"
+                    (image :path "${icon}" :image-width 145 :image-height 125)
+                    (label :justify "center" :wrap "true" :limit-width 18 :text name :tooltip name)
+                )
+            )
+        )
+    )
+)
+
+(defwidget cc-padded-box []
+    (scroll :vscroll true
+        (eventbox :onclick "eww close app-launcher -c ~/.config/eww/launchpad;"
+            (box :class "app-grid" :space-evenly false :spacing 60 :orientation "v" :onclick "eww close app-launcher -c ~/.config/eww/launchpad;"
+                (box :class "input-box" :halign "center"
+                    (box :orientation "h" :space-evenly false :halign "end" :spacing 10 
+                        (input :onchange "python ~/.config/eww/launchpad/scripts/main.py -s '{}'" :value input-text)
+                        (button :onclick "eww -c ~/.config/eww/launchpad update input-text='' "
+                            (label :text "󰅖")
+                        )
+                    )
+                )
+
+                (for row in {filter-text}
+                    (box :space-evenly false :spacing 74 :orientation "h"
+                        (for app in row
+                            (application :name {app.name} :command {app.command} :icon {app.icon})
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
+
+(defwindow app-launcher
+    :geometry (geometry :x "0%" :y "0%" :width "100%" :height "100%")
+    :monitor 0
+    :stacking "fg"
+    :focusable "true"
+    :exclusive "true"
+    :namespace "launchpad"
+
+    (cc-padded-box)
+)

@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+#swaylock -i ~/Pictures/Wallpapers/chuttersnap-WW9Kxy1VKDU-unsplash.jpg --effect-blur 10x2 --clock &
+gtklock -i &
+#sleep 5 & systemctl suspend

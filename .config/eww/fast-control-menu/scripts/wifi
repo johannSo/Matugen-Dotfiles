@@ -1,0 +1,55 @@
+#!/bin/sh
+
+device=wlan0
+
+symbol() {
+  if nmcli radio wifi | grep -q "enabled"; then
+    name=$(iwgetid | sed 's/"/ /g' | awk '{print $3}')
+    if [[ "$name" != "" ]]; then
+      QUALITY=$(iwconfig $device | grep Link | sed 's/[=\/]/ /g' | awk '{print $3}')
+      MAX_QUALITY=$(iwconfig $device | grep Link | sed 's/[=\/]/ /g' | awk '{print $4}')
+      qual=$(echo $((QUALITY * 100 / MAX_QUALITY)))
+
+      if [[ "$qual" -gt "90" ]]; then
+        echo "󰤨"
+      elif [[ "$qual" -gt "50" ]]; then
+        echo "󰤥"
+      elif [[ "$qual" -gt "25" ]]; then
+        echo "󰤢"
+      else
+        echo "󰤯"
+      fi
+    else
+      echo "󰤧" # WiFi an, aber nicht verbunden
+    fi
+  else
+    echo "󰤮" # WiFi aus
+  fi
+}
+
+name() {
+  if nmcli radio wifi | grep -q "enabled"; then
+    name=$(iwgetid | sed 's/"/ /g' | awk '{print $3}')
+    if [[ "$name" != "" ]]; then
+      echo "$name"
+    else
+      echo "On" # WiFi an, aber nicht verbunden
+    fi
+  else
+    echo "Off" # WiFi aus
+  fi
+}
+
+toggle() {
+  if nmcli radio wifi | grep -q "enabled"; then
+    nmcli radio wifi off
+    notify-send --icon=network-wireless-offline --urgency=normal "WiFi" "WiFi has been turned off."
+  else
+    nmcli radio wifi on
+    notify-send --icon=network-wireless --urgency=normal "WiFi" "WiFi has been turned on."
+  fi
+}
+
+[ "$1" = "icon" ] && symbol && exit
+[ "$1" = "name" ] && name && exit
+[ "$1" = "toggle" ] && toggle && exit

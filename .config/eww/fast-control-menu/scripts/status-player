@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+status=$(playerctl status 2> /dev/null)
+icon=""
+
+sh ~/.config/eww/fast-control-menu/scripts/songart.sh get
+
+if [[ "$status" == "Playing" ]]; then
+  icon=""
+elif [[ "$status" == "Paused" ]]; then
+  icon=""
+fi
+
+echo "$icon"

@@ -1,0 +1,59 @@
+ #!/bin/bash
+
+get_devices() {
+ bluetoothctl devices Connected | awk '{print $2}'
+}
+
+get_device_name() {
+ device=$1
+ bluetoothctl info "$device" | grep 'Name' | awk -F': ' '{print $2}'
+}
+
+get_battery_status() {
+ device=$1
+ battery_info=$(bluetoothctl info "$device" | grep 'Battery Percentage')
+ battery_dec=$(echo $battery_info | awk '{print $4}' | tr -d '()')
+ echo "$battery_dec"
+}
+
+
+get_battery_icon() {
+ battery=$1
+ if [ "$battery" -ge 90 ]; then
+ echo '🔋'
+ elif [ "$battery" -ge 80 ]; then
+ echo '🔌'
+ elif [ "$battery" -ge 70 ]; then
+ echo '⚡'
+ else
+ echo '⚡'
+ fi
+}
+
+info_type=$1
+devices=$(get_devices)
+
+if [ -z "$devices" ]; then
+ exit 1
+fi
+
+for device in $devices; do
+ device_info=$(bluetoothctl info "$device")
+ if echo "$device_info" | grep -q "Connected: yes"; then
+ case "$info_type" in
+   "name")
+     name=$(get_device_name "$device")
+     echo Device: "$name "
+     ;;
+   "icon")
+     battery=$(get_battery_status "$device")
+     icon=$(get_battery_icon "$battery")
+     echo "$icon"
+     ;;
+   "battery")
+     battery=$(get_battery_status "$device")
+     echo battery: "$battery"
+     ;;
+ esac
+ fi
+done

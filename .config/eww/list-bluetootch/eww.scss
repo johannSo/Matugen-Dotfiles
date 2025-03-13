@@ -1,0 +1,11 @@
+$cc-br: rgba(148, 144, 144, 0.4);
+
+*{
+	all: unset;
+}
+.bluetooth-device {
+  background-color: rgba(gray, $alpha: 0.4);
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid $cc-br;
+}
