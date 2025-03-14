@@ -5,8 +5,10 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GdkPixbuf, Gdk
 import os
 import subprocess
+import getpass
 
-# Paths
+# Vars
+USER = getpass.getuser()
 WALLS_DIR = os.path.expanduser("~/walls")
 CONFIG_DIR = os.path.expanduser("~/.config/swww")
 WALLPAPER_FILE = os.path.join(CONFIG_DIR, "current_wallpaper")
@@ -89,16 +91,15 @@ class WallpaperChanger(Gtk.Window):
 
         # IconView für Wallpaper-Vorschau
         self.iconview = Gtk.IconView()
-        self.iconview.set_pixbuf_column(0)  # Vorschaubild
-        self.iconview.set_text_column(-1)  # Text verstecken (keine Namen)
+        self.iconview.set_pixbuf_column(0)
+        self.iconview.set_text_column(-1)
         self.iconview.set_selection_mode(Gtk.SelectionMode.SINGLE)
         self.iconview.connect("selection-changed", self.on_selection_changed)
-        # Gitterlayout einstellen
-        self.iconview.set_item_orientation(Gtk.Orientation.HORIZONTAL)  # Horizontaler Fluss
-        self.iconview.set_columns(-1)  # Automatische Spaltenanzahl
-        self.iconview.set_item_width(120)  # Breite jedes Elements
-        self.iconview.set_spacing(10)  # Abstand zwischen Elementen
-        self.iconview.set_row_spacing(10)  # Abstand zwischen Zeilen
+        self.iconview.set_item_orientation(Gtk.Orientation.HORIZONTAL)
+        self.iconview.set_columns(-1)
+        self.iconview.set_item_width(120)
+        self.iconview.set_spacing(10)
+        self.iconview.set_row_spacing(10)
         scrolled.add(self.iconview)
 
         # Model für IconView (Pixbuf, Name)
@@ -109,7 +110,7 @@ class WallpaperChanger(Gtk.Window):
 
         # Button zum Setzen des Wallpapers
         set_button = Gtk.Button(label="Set Selected Wallpaper")
-        set_button.get_style_context().add_class("flat")  # Optional: Flacher Button-Stil
+        set_button.get_style_context().add_class("flat")
         set_button.connect("clicked", self.on_set_button_clicked)
         vbox.pack_start(set_button, False, False, 0)
 
@@ -120,7 +121,6 @@ class WallpaperChanger(Gtk.Window):
             filepath = os.path.join(WALLS_DIR, filename)
             if os.path.isfile(filepath) and filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
                 try:
-                    # Vorschaubild erstellen (max 100x100)
                     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filepath, 100, 100, True)
                     self.store.append([pixbuf, filename])
                 except Exception as e:
@@ -161,16 +161,13 @@ class WallpaperChanger(Gtk.Window):
     def set_wallpaper(self, filepath):
         """Setze das Wallpaper mit swww und führe matugen aus."""
         try:
-            # swww mit grow-Transition und 2 Sekunden Dauer
             subprocess.run([
                 "swww", "img", filepath,
                 "--transition-type", "grow",
                 "--transition-duration", "2",
                 "--transition-fps", "60"
             ], check=True)
-            # Matugen ausführen mit dem aktuellen Wallpaper
-            subprocess.run(["/home/satoshi/.cargo/bin/matugen", "image", filepath], check=True)
-            # Wallpaper-Pfad speichern
+            subprocess.run([f"/home/{USER}/.cargo/bin/matugen", "image", filepath], check=True)
             with open(WALLPAPER_FILE, "w") as f:
                 f.write(filepath)
             self.update_current_wallpaper_label()
@@ -193,3 +190,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

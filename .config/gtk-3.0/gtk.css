@@ -6,8 +6,8 @@
  */
 
 @define-color accent_color #c1c1ff;
-@define-color accent_bg_color #414178;
-@define-color accent_fg_color #e2dfff;
+@define-color accent_bg_color #404178;
+@define-color accent_fg_color #e1dfff;
 @define-color destructive_color #ffb4ab;
 @define-color destructive_bg_color #93000a;
 @define-color destructive_fg_color #ffdad6;
