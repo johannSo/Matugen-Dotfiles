@@ -88,3 +88,6 @@ export PATH="/home/satoshi/.spicetify:$PATH"
 
 export PATH=$PATH:/home/satoshi/.spicetify
 fastfetch
+export PATH=$HOME/.local/bin:$PATH
+
+/home/satoshi/bin/salut
