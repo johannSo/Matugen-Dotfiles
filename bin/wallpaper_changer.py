@@ -6,7 +6,7 @@ from gi.repository import Gtk, GdkPixbuf, Gdk
 import os
 import subprocess
 
-# Pfade
+# Paths
 WALLS_DIR = os.path.expanduser("~/walls")
 CONFIG_DIR = os.path.expanduser("~/.config/swww")
 WALLPAPER_FILE = os.path.join(CONFIG_DIR, "current_wallpaper")
@@ -17,7 +17,7 @@ if not os.path.exists(CONFIG_DIR):
 if not os.path.exists(WALLS_DIR):
     os.makedirs(WALLS_DIR)
 
-# Catppuccin Mocha CSS ohne Animation
+# Catppuccin Mocha CSS
 CSS = """
 window {
     background-color: #1E1E2E;

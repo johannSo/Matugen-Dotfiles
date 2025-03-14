@@ -1,0 +1,70 @@
+@define-color	flamingo  #f2cdcd;
+@define-color	flamingo-rgb  rgb(242, 205, 205);
+@define-color	pink  #f5c2e7;
+@define-color	pink-rgb  rgb(245, 194, 231);
+@define-color	mauve  #cba6f7;
+@define-color	mauve-rgb  rgb(203, 166, 247);
+@define-color	red  #f38ba8;
+@define-color	red-rgb  rgb(243, 139, 168);
+@define-color	maroon  #eba0ac;
+@define-color	maroon-rgb  rgb(235, 160, 172);
+@define-color	peach  #fab387;
+@define-color	peach-rgb  rgb(250, 179, 135);
+@define-color	yellow  #f9e2af;
+@define-color	yellow-rgb  rgb(249, 226, 175);
+@define-color	green  #a6e3a1;
+@define-color	green-rgb  rgb(166, 227, 161);
+@define-color	teal  #94e2d5;
+@define-color	teal-rgb  rgb(148, 226, 213);
+@define-color	sky  #89dceb;
+window {
+margin: 0px;
+border: 1px solid #bd93f9;
+background-color: #282a36;
+}
+
+#input {
+margin: 5px;
+border: none;
+color: #f8f8f2;
+background-color: #44475a;
+}
+
+#inner-box {
+margin: 5px;
+border: none;
+background-color: #282a36;
+}
+
+#outer-box {
+margin: 5px;
+border: none;
+background-color: #282a36;
+}
+
+#scroll {
+margin: 0px;
+border: none;
+}
+
+#text {
+margin: 5px;
+border: none;
+color: #f8f8f2;
+} 
+
+#entry.activatable #text {
+color: #282a36;
+}
+
+#entry > * {
+color: #f8f8f2;
+}
+
+#entry:selected {
+background-color: #44475a;
+}
+
+#entry:selected #text {
+font-weight: bold;
+}

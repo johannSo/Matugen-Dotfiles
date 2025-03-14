@@ -1,0 +1,4 @@
+theme = catppuccin-mocha
+# font-family = CaskaydiaCove
+# background-opacity = 0.95
+# gtk-titlebar = false

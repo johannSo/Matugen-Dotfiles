@@ -31,11 +31,11 @@
 
 @define-color on_primary #2a2a60;
 
-@define-color on_primary_container #e1dfff;
+@define-color on_primary_container #e2dfff;
 
 @define-color on_primary_fixed #14134a;
 
-@define-color on_primary_fixed_variant #404178;
+@define-color on_primary_fixed_variant #414178;
 
 @define-color on_secondary #2f2f42;
 
@@ -63,9 +63,9 @@
 
 @define-color primary #c1c1ff;
 
-@define-color primary_container #404178;
+@define-color primary_container #414178;
 
-@define-color primary_fixed #e1dfff;
+@define-color primary_fixed #e2dfff;
 
 @define-color primary_fixed_dim #c1c1ff;
 
@@ -81,7 +81,7 @@
 
 @define-color shadow #000000;
 
-@define-color source_color #222232;
+@define-color source_color #1e1e2f;
 
 @define-color surface #131318;
 

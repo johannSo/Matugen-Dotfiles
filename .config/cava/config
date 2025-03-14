@@ -250,7 +250,7 @@
 gradient = 1
 gradient_count = 8
 gradient_color_1 = '#39383f'
-gradient_color_2 = '#404178'
+gradient_color_2 = '#414178'
 gradient_color_3 = '#454559'
 gradient_color_4 = '#5f3c51'
 gradient_color_5 = '#ffb4ab'

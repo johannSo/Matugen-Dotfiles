@@ -1,6 +1,4 @@
-# Antigen
-source ~/bin/roundy/roundy.zsh
-#source ~/bin/antigen.zsh
+source ~/.zsh/roundy/roundy.zsh
 
 # Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -68,6 +66,7 @@ alias upd="sudo dnf update && sudo dnf upgrade"
 alias apt="dnf"
 alias wifi="nmtui"
 alias ble="/home/satoshi/.cargo/bin/bluetui"
+alias pipes="pipes.sh"
 
 ## Shell integrations
 eval "$(fzf --zsh)"
@@ -88,3 +87,4 @@ export PATH="/home/satoshi/.bun/bin:$PATH"
 export PATH="/home/satoshi/.spicetify:$PATH"
 
 export PATH=$PATH:/home/satoshi/.spicetify
+fastfetch

@@ -8,13 +8,13 @@
 
 * {
     primary: #c1c1ff;
-    primary-fixed: #e1dfff;
+    primary-fixed: #e2dfff;
     primary-fixed-dim: #c1c1ff;
     on-primary: #2a2a60;
     on-primary-fixed: #14134a;
-    on-primary-fixed-variant: #404178;
-    primary-container: #404178;
-    on-primary-container: #e1dfff;
+    on-primary-fixed-variant: #414178;
+    primary-container: #414178;
+    on-primary-container: #e2dfff;
     secondary: #c6c4dd;
     secondary-fixed: #e2e0f9;
     secondary-fixed-dim: #c6c4dd;

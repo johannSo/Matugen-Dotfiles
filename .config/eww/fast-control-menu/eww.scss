@@ -1,35 +1,4 @@
 // ============================================================
-// Control Center
-// ============================================================
-// Control Center
-// ============================================================
-
-* {
- all: unset;
-}
-
-// Main colors
-$black: #242424;
-$red: #d84b4f;
-$yellow: #d8af4b;
-$green: #9ed84b;
-$blue: #4b91d8;
-$magenta: #734bd8;
-$cyan: #4bd8a2;
-$white: #c6c6c6;
-$gray: gray;
-$gray-alt: #333333;
-
-// Control Center Main Colors
-$cc-fg: $white;
-$cc-bg: rgba($color: $black, $alpha: 0.5);
-$cc-circular-bg: rgba($color: $gray, $alpha: 0.8);
-$cc-text: $white;
-$cc-br: rgba(148, 144, 144, 0.4);
-
-// Main container box
-.cc-padded-box {
-// ============================================================
 //                                               Control Center
 // ============================================================
 
@@ -37,9 +6,6 @@ $cc-br: rgba(148, 144, 144, 0.4);
   all: unset;
 }
 
-// Importiere die Farben aus Kitty/Matugen
-@import "~/.config/kitty/matugen/colors.css";
-
 // Main colors
 $black: #242424;
 $red: #d84b4f;
@@ -61,7 +27,7 @@ $cc-br: rgba(148, 144, 144, 0.4);
 
 // Main container box
 .cc-padded-box {
-  background-color: rgba(var(--background), 0.4); // Farbe aus colors.css mit Transparenz
+  background-color: rgba($color: $gray, $alpha: 0.4); // Grau mit Transparenz
   border-radius: 16px; // Abgerundete Ecken
   padding: 10px;
   border: 1px solid $cc-br;
@@ -226,7 +192,7 @@ $cc-br: rgba(148, 144, 144, 0.4);
 
 .msc_box {
   min-height: 90px;
-  background-color: rgba($color: gray, $alpha: 0.4);
+  background-color: rgba($color: $gray, $alpha: 0.4);
   padding: 15px;
   border-radius: 16px;
   background-size: cover;
