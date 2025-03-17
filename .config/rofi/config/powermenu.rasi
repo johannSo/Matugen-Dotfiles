@@ -1,0 +1,153 @@
+@import "../matugen/matugen-rofi.rasi"
+configuration {
+    kb-cancel: "Escape";
+    kb-accept-entry: "Return,KP_Enter";
+    show-icons:                     true;
+    display-drun:                   "";
+    drun-display-format:            "{icon} {name}";
+    disable-history:                false;
+    click-to-exit:                  true;
+    location:                       4;
+}
+
+@import "font.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @surface;
+    text-color:                     @on-surface;
+    border:                         2px;
+    border-color:                   @outline;
+    border-radius:                  10px;
+    width:                          110px;
+    x-offset:                       -2%;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled:                        true;
+    margin:                         0px 0px 0px 8px;
+    padding:                        8px;
+    background-color:               @surface-container;
+    text-color:                     @on-surface;
+    border:                         0px 0px 2px 0px;
+    border-color:                   @outline;
+    border-radius:                  10px;
+}
+
+textbox-prompt-colon {
+    expand:                         false;
+    str:                            "";
+    border-radius:                  100%;
+    background-color:               @primary-container;
+    text-color:                     @on-primary-container;
+    padding:                        8px 12px 8px 12px;
+    font:                           "Fira Code 13";
+}
+
+entry {
+    background-color:               @surface-container;
+    text-color:                     @on-surface;
+    placeholder-color:              @on-surface-variant;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search...";
+    blink:                          true;
+    border:                         0px 0px 2px 0px;
+    border-color:                   @outline;
+    border-radius:                  10px;
+    padding:                        8px;
+}
+
+inputbar {
+    children:                       [ textbox-prompt-colon ];
+    background-color:               @surface;
+    text-color:                     @on-surface;
+    expand:                         false;
+    border:                         0px;
+    border-radius:                  0px;
+    border-color:                   @outline;
+    margin:                         0px;
+    padding:                        0px;
+    position:                       center;
+}
+
+case-indicator {
+    background-color:               @surface;
+    text-color:                     @on-surface;
+    spacing:                        0;
+}
+
+listview {
+    background-color:               @surface;
+    columns:                        1;
+    lines:                          5;
+    spacing:                        15px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @surface;
+    children:                       [ listview ];
+    spacing:                        15px;
+    padding:                        15px;
+}
+
+element {
+    background-color:               @surface-container;
+    text-color:                     @on-surface;
+    orientation:                    horizontal;
+    border-radius:                  10px;
+    padding:                        20px;
+}
+
+element-icon {
+    background-color:               inherit;
+    text-color:                     inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           0px;
+    border:                         0px;
+}
+
+element-text {
+    background-color:               inherit;
+    text-color:                     inherit;
+    font:                           "Symbols Nerd Font Mono 20";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         0px;
+}
+
+element selected {
+    background-color:               @primary-container;
+    text-color:                     @on-primary-container;
+    border:                         0px;
+    border-radius:                  10px;
+    border-color:                   @outline;
+}
+
+element.active,
+element.selected.urgent {
+    background-color:               @tertiary-container;
+    text-color:                     @on-tertiary-container;
+    border-color:                   @tertiary;
+}
+
+element.selected.urgent {
+    border-color:                   @outline;
+}
+
+element.urgent,
+element.selected.active {
+    background-color:               @error-container;
+    text-color:                     @on-error-container;
+    border-color:                   @error;
+}
+
+element.selected.active {
+    border-color:                   @outline;
+}
