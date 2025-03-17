@@ -1,5 +1,5 @@
-source ~/.zsh/roundy/roundy.zsh
-
+#source ~/.zsh/roundy/roundy.zsh
+eval "$(starship init zsh)"
 # Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
@@ -76,18 +76,10 @@ eval "$(zoxide init zsh)"
 export PATH=$PATH:/home/satoshi/bin
 export PATH=$PATH:/home/satoshi/.cargo/bin
 . "/home/satoshi/.deno/env"
-
-# bun completions
 [ -s "/home/satoshi/.bun/_bun" ] && source "/home/satoshi/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/home/satoshi/.bun/bin:$PATH"
 export PATH="/home/satoshi/.spicetify:$PATH"
-
 export PATH=$PATH:/home/satoshi/.spicetify
-fastfetch
 export PATH=$HOME/.local/bin:$PATH
-
-/home/satoshi/bin/salut

@@ -75,7 +75,7 @@
   },
     "custom/power": {
         "format": " ⏻  ",
-        "on-click": "wlogout"
+        "on-click": "/home/satoshi/.config/hypr/scripts/powermenu"
   },
   }  
   "network": {
